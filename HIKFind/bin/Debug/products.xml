@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Product>
+    <Name>DS-2CD2123G0-I(S)</Name>
+    <Url>https://www.hikvision.com/cz/products/IP-Products/Network-Cameras/Pro-Series-EasyIP-/DS-2CD2123G0-I-S-/</Url>
+    <FolderPath>Results\DS-2CD2123G0-I(S)\</FolderPath>
+  </Product>
+</ArrayOfProduct>
