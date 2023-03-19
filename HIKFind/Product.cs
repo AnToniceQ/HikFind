@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 
 namespace HIKFind
@@ -13,5 +9,13 @@ namespace HIKFind
         public Bitmap[] Images { get; set; }
         public string Url { get; set; }
         public string FolderPath { get; set; }
+        public DateTime DateSearched { get; set; }
+        public string DateSearchedString
+        {
+            get
+            {
+                return DateSearched.ToString("dd.MM.yyyy H:mm");
+            }
+        }
     }
 }

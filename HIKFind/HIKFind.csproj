@@ -40,21 +40,26 @@
     <ApplicationIcon>hikfind.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1210.39, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1210.39\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1587.40\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1210.39, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1210.39\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1587.40\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1210.39, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1210.39\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1587.40\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -77,58 +82,54 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="InfoWindows\Helpers\InfoWindowEnum.cs" />
+    <Compile Include="Search\code\Searcher\BaseSearcher.cs" />
     <Compile Include="ImageEditor.cs" />
-    <Compile Include="InfoWindow.xaml.cs">
+    <Compile Include="InfoWindows\InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoadingWindow.xaml.cs">
+    <Compile Include="InfoWindows\LoadingWindow.xaml.cs">
       <DependentUpon>LoadingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product.cs" />
-    <Compile Include="AlertWindow.xaml.cs">
-      <DependentUpon>AlertWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Searcher.cs" />
-    <Compile Include="Search\CheckboxSetting.cs" />
-    <Compile Include="Search\FinderCheckboxSetting.cs" />
-    <Compile Include="Search\FinderRadioSetting.cs" />
-    <Compile Include="Search\FinderSearchSetting.cs" />
-    <Compile Include="Search\RadioSetting.cs" />
-    <Compile Include="Search\Webscraper\FindBetween.cs" />
-    <Compile Include="Search\SettingCategory.cs" />
-    <Compile Include="Search\SearchSetting.cs" />
-    <Compile Include="Search\Helpers\SearchedResultItem.cs" />
-    <Compile Include="Search\SearchedResult.xaml.cs">
+    <Compile Include="Search\code\Searcher\Searcher.cs" />
+    <Compile Include="Settings\CheckboxSetting.cs" />
+    <Compile Include="Settings\FinderCheckboxSetting.cs" />
+    <Compile Include="Settings\FinderRadioSetting.cs" />
+    <Compile Include="Settings\FinderSearchSetting.cs" />
+    <Compile Include="Settings\RadioSetting.cs" />
+    <Compile Include="Search\code\Webscraper\FindBetween.cs" />
+    <Compile Include="Settings\SettingCategory.cs" />
+    <Compile Include="Settings\SearchSetting.cs" />
+    <Compile Include="Search\code\Helpers\SearchedResultItem.cs" />
+    <Compile Include="Search\window\SearchedResult.xaml.cs">
       <DependentUpon>SearchedResult.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Search\Web\WebBrowserWindow.xaml.cs">
+    <Compile Include="Search\window\WebBrowserWindow.xaml.cs">
       <DependentUpon>WebBrowserWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Search\Webscraper\WebScraper.cs" />
-    <Compile Include="Search\HikFindSearch.xaml.cs">
+    <Compile Include="Search\code\Webscraper\WebScraper.cs" />
+    <Compile Include="HikFindSearch.xaml.cs">
       <DependentUpon>HikFindSearch.xaml</DependentUpon>
     </Compile>
-    <Page Include="InfoWindow.xaml">
+    <Page Include="InfoWindows\InfoWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="LoadingWindow.xaml">
+    <Page Include="InfoWindows\LoadingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Search\HikFindSearch.xaml">
+    <Page Include="HikFindSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AlertWindow.xaml">
+    <Page Include="Search\window\SearchedResult.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Search\SearchedResult.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Search\Web\WebBrowserWindow.xaml">
+    <Page Include="Search\window\WebBrowserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,12 +188,18 @@
   <ItemGroup>
     <Resource Include="Images\red_cross.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\question-mark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\refresh.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1210.39\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1210.39\build\Microsoft.Web.WebView2.targets')" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Tenhle projekt odkazuje na balíčky NuGet, které nejsou v tomhle počítači k dispozici. Když je chcete stáhnout, použijte funkci obnovení balíčků NuGet.  Další informace najdete na adrese http://go.microsoft.com/fwlink/?LinkID=322105. Chybějícím souborem je soubor {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1210.39\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1210.39\build\Microsoft.Web.WebView2.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets'))" />
   </Target>
 </Project>

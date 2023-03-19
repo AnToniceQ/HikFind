@@ -1,0 +1,32 @@
+FIX = HikFind nyní zase umí stahovat obrázky. (Chyba na straně Hikvisionu = změna struktury stránek)
+FIX = HikFind nyní automaticky uloží vyhledání a manuální ukládání tím pádem není třeba
+FIX = HikFind nyní zase umí vyhledávat z oficiálních EN a EU stránek! (Zase chyba na straně Hikvisionu = změna struktury souboru, ze kterého jsem tahal informace)
+A = Na výsledek vyhledávání se nyní může zmáčknout pravým tlačítkem na název produktu a tím zkopírovat URL adresu hikvisionu, ze které byli informace vytaženy.
+U = Výsledky vyhledávání jsou nyní o kousek vizuálně větší.
+U = Výsledky vyhledávání mají u sebe datum a čas vyhledání.
+U = Obrázky se nyní mohou CROPNOUT i v .png formátu.
+A = Uživatel si nyní může vybrat zda o CROP obrázku stojí, či nikoliv.
+A = Uživatel si nyní může vybrat zda chce obrázek Transparentní, či nikoliv.
+FIX = Výsledky vyhledávání jsou nyní řazeny správně - dřívější vyhledání je nahoře.
+A = Nastavení uživatelem nyní zůstávají a nevrací se do defaultního stavu i po ukončení aplikace.
+A = Každé uživatelské nastavení má u sebe nyní otazníček, u kterého když uživatel najede myší, zobrazí stručný popis, co nastavení dělá.
+A = Každý výsledek se nyní dá rychle znovu-aktualizovat zmáčknutím tlačítka.
+U = HikFind nyní umí smazat jednotlivé položky z výsledků.
+
+
+CO UDĚLAT:
+- Podpora WebP convertor obrázku
+- Zrychlit ImageEditor === to je fakt hrůza..
+- Zrychlit stahování obrázků - download jako samotný je pecka, ale převod dat z obrázku MemoryStreamem do BitMapy je z nějákého důvodu strašně pomalý??
+
+- Podpora vyhledávání rekordérů
+
+- Detailní stránka o každém produktu
+	- Obrázky (všechny)
+	- Název
+	- Příslušenství
+	- Možnost zobrazení datasheetu v aplikaci
+	- Datum vyhledání
+	- Výtažek základních informací z datasheetu
+
+cloc --exclude-dir=bin,obj,Properties C:\Users\tonda\Source\Repos\ThonyPig\HikFind\HIKFind\

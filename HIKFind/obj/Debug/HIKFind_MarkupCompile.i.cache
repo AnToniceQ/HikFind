@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\HIKFIND\HIKFind\obj\Debug\
+C:\Users\tonda\source\repos\ThonyPig\HikFind\HIKFind\obj\Debug\
 HIKFind
 none
 false
 DEBUG;TRACE
-D:\HIKFIND\HIKFind\App.xaml
-6-529584809
-3-1617146320
-241919361999
-20-203134630
-InfoWindow.xaml;LoadingWindow.xaml;Search\HikFindSearch.xaml;AlertWindow.xaml;Search\SearchedResult.xaml;Search\Web\WebBrowserWindow.xaml;
+C:\Users\tonda\source\repos\ThonyPig\HikFind\HIKFind\App.xaml
+5-862209817
+31426111879
+26439999744
+231841200321
+InfoWindows\InfoWindow.xaml;InfoWindows\LoadingWindow.xaml;HikFindSearch.xaml;Search\window\SearchedResult.xaml;Search\window\WebBrowserWindow.xaml;
 
 True
 

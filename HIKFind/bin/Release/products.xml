@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Product>
+    <Name>DS-2CD2143G2-I(S)</Name>
+    <Url>http://www.hikvision.com/en/products/IP-Products/Network-Cameras/Pro-Series-EasyIP-/ds-2cd2143g2-i-s-/</Url>
+    <FolderPath>Results\DS-2CD2143G2-I(S)\</FolderPath>
+    <DateSearched>2023-03-18T16:20:18.0591504+01:00</DateSearched>
+  </Product>
+</ArrayOfProduct>
