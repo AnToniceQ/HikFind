@@ -26,13 +26,10 @@ namespace HIKFind
 {
     public partial class HikFindSearch : Window
     {
-
-
-
         public static ObservableCollection<Product> products = new ObservableCollection<Product>();
 
         public static ObservableCollection<SettingCategory> settingCategories = new ObservableCollection<SettingCategory>();
-        public static Dictionary<string, SearchSetting> settings = new Dictionary<string, SearchSetting>();
+        public static Dictionary<string, BaseSearchSetting> settings = new Dictionary<string, BaseSearchSetting>();
 
         Searcher searcher = new Searcher(10, new WebScraper[]
         {
@@ -43,28 +40,35 @@ namespace HIKFind
         public HikFindSearch()
         {
             InitializeComponent();
-
-            List<SettingCategory> GUICategories = new List<SettingCategory>();
-            foreach (SettingCategory categories in settingCategories)
+            foreach (SettingCategory settingCategory in settingCategories)
             {
-                GUICategories.Add(categories);
+                FindAllSettings(settingCategory).ToList().ForEach(x => settings.Add(x.Key, x.Value));
             }
-            SearchSettingsCategories.ItemsSource = GUICategories;
+            SearchSettingsCategories.ItemsSource = settingCategories;
             productsList.DataContext = products;
+        }
+
+        private Dictionary<string, BaseSearchSetting> FindAllSettings(BaseSetting category)
+        {
+            Dictionary<string, BaseSearchSetting> tempSettings = new Dictionary<string, BaseSearchSetting>();
+            if(!(category.SearchSettings is null))
+            foreach (BaseSetting setting in category.SearchSettings)
+            {
+                if (!(setting.SearchSettings is null) && setting.SearchSettings.Count() > 0)
+                {
+                    FindAllSettings(setting).ToList().ForEach(x => tempSettings.Add(x.Key, x.Value));
+                }
+                if(!(setting is SettingCategory))
+                    {
+                        BaseSearchSetting realSetting = setting as BaseSearchSetting;
+                        tempSettings.Add(realSetting.Name, realSetting);
+                    }
+            }
+            return tempSettings;
         }
 
         private async void Hledej_Click(object sender, RoutedEventArgs e)
         {
-
-            List<Dictionary<string, SearchSetting>> tempSettings = new List<Dictionary<string, SearchSetting>>();
-
-            foreach (SettingCategory category in settingCategories)
-            {
-                tempSettings.Add(category.SearchSettings);
-            }
-
-            settings = tempSettings.Aggregate((a, b) => a.Union(b).ToDictionary(x => x.Key, x => x.Value));
-
             string search = SearchBox.Text;
 
             LoadingWindow loading = new LoadingWindow("Vyhledávám: " + search, "Začínám s hledáním");
@@ -77,26 +81,10 @@ namespace HIKFind
 
             try
             {
-                if (settings["zakladnipomoc"].Check)
+                if (settings["upravavstupu"].Check)
                 {
                     loading.Text = "Upravuji Input";
-                    if (search.Contains("-"))
-                    {
-                        int indexOfFirstDash = search.IndexOf("-");
-                        int additionalDash = search.IndexOf("-", indexOfFirstDash + 1);
-
-                        if (additionalDash > -1)
-                        {
-                            search = search.Remove(additionalDash, search.Length - additionalDash);
-                        }
-                    }
-
-                    if (search.Contains("("))
-                    {
-                        int indexOfDash = search.IndexOf("(");
-
-                        search = search.Remove(indexOfDash, search.Length - indexOfDash);
-                    }
+                    search = await InputHelper.OptimizeInput(search);
                 }
 
                 SaveSettings();
@@ -134,7 +122,6 @@ namespace HIKFind
 
             string actualPath = folderWOExePath + @"\" + @folderProductPath;
 
-            Trace.WriteLine(actualPath);
             if (Directory.Exists(actualPath))
             {
                 Process.Start(actualPath);

@@ -1,6 +1,6 @@
 ﻿namespace HIKFind.Settings
 {
-    public class RadioSetting : SearchSetting
+    public class RadioSetting : BaseSearchSetting
     {
         protected string group;
         public string Group
@@ -15,17 +15,13 @@
             }
         }
 
-        public RadioSetting(string text, bool defaultCheck, string description, string group) : base(text, description, defaultCheck)
+        public RadioSetting(string name, string text, string description, bool defaultCheck, string group, BaseSetting[] searchSettings) : base(name, text, description, defaultCheck, searchSettings)
         {
             this.group = group;
         }
-        public RadioSetting(string text, string group, string description) : base(text, description)
+        public RadioSetting(string name, string text, string description, string group, BaseSetting[] searchSettings) : base(name, text, description, searchSettings)
         {
             this.group = group;
-        }
-
-        public RadioSetting()
-        {
         }
     }
 }

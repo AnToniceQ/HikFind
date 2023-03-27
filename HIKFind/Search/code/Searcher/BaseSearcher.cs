@@ -36,7 +36,7 @@ namespace HIKFind
 
             string[] rawResults = new string[0];
 
-            if (!HikFindSearch.settings["modzoufalosti"].Check)
+            if (!HikFindSearch.settings["webhledani"].Check)
             {
                 for (int i = 0; i < webScrapers.Length; i++)
                 {
@@ -61,7 +61,7 @@ namespace HIKFind
                     for (int y = 0; y < rawResults.Length; y++)
                     {
                         webScrapers[i].SetTempScrape(rawResults[y]);
-                        string tempName = "[" + webScrapers[i].Name + "] | " + webScrapers[i].ScrapeBetween(new FindBetween("\"title\":\"", "\""));
+                        string tempName = webScrapers[i].ScrapeBetween(new FindBetween("\"title\":\"", "\""));
                         tempName = tempName.Replace("<strong>", "");
                         tempName = tempName.Replace("<\\/strong>", "");
                         string name = tempName;
@@ -91,13 +91,13 @@ namespace HIKFind
                             loading.Text = "Přidávám produkt do zobrazených výsledků";
                             foreach(Product realProduct in HikFindSearch.products)
                             {
-                                if(realProduct.Name == name)
+                                if (realProduct.Name == name)
                                 {
                                     alreadyExists = true;
                                     break;
                                 }
                             }
-                            resultItems.Add(new SearchedResultItem(name, url, alreadyExists));
+                            resultItems.Add(new SearchedResultItem(webScrapers[i].Name, name, url, alreadyExists));
                         }
 
                         if (resultItems.Count - i * maxSearch >= maxSearch)
@@ -110,7 +110,7 @@ namespace HIKFind
 
 
 
-            if ((resultItems.Count <= 0 && HikFindSearch.settings["webpohik"].Check) || HikFindSearch.settings["modzoufalosti"].Check)
+            if ((resultItems.Count <= 0 && HikFindSearch.settings["webpohik"].Check) || HikFindSearch.settings["webhledani"].Check)
             {
                 webScraperWEB.ResetWebClient();
                 try
@@ -133,7 +133,7 @@ namespace HIKFind
                 for (int i = 0; i < rawResults.Length; i++)
                 {
                     webScraperWEB.SetTempScrape(rawResults[i]);
-                    string name = "[" + webScraperWEB.Name + "] | " + webScraperWEB.ScrapeBetween(new FindBetween("\"Title\":\"", "\""));
+                    string name = webScraperWEB.ScrapeBetween(new FindBetween("\"Title\":\"", "\""));
                     string url = webScraperWEB.ScrapeBetween(new FindBetween("\"ActualClickUrl\":\"", "\",\""));
                     webScraperWEB.ClearTempScrape();
 
@@ -154,7 +154,7 @@ namespace HIKFind
                                 break;
                             }
                         }
-                        resultItems.Add(new SearchedResultItem(name, url, alreadyExists));
+                        resultItems.Add(new SearchedResultItem(webScraperWEB.Name, name, url, alreadyExists));
                     }
 
                     if (resultItems.Count - i * maxSearch >= maxSearch)

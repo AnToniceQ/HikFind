@@ -3,21 +3,24 @@ FIX = HikFind nyní automaticky uloží vyhledání a manuální ukládání tí
 FIX = HikFind nyní zase umí vyhledávat z oficiálních EN a EU stránek! (Zase chyba na straně Hikvisionu = změna struktury souboru, ze kterého jsem tahal informace)
 A = Na výsledek vyhledávání se nyní může zmáčknout pravým tlačítkem na název produktu a tím zkopírovat URL adresu hikvisionu, ze které byli informace vytaženy.
 U = Výsledky vyhledávání jsou nyní o kousek vizuálně větší.
-U = Výsledky vyhledávání mají u sebe datum a čas vyhledání.
+A = Výsledky vyhledávání mají u sebe datum a čas vyhledání.
 U = Obrázky se nyní mohou CROPNOUT i v .png formátu.
 A = Uživatel si nyní může vybrat zda o CROP obrázku stojí, či nikoliv.
 A = Uživatel si nyní může vybrat zda chce obrázek Transparentní, či nikoliv.
 FIX = Výsledky vyhledávání jsou nyní řazeny správně - dřívější vyhledání je nahoře.
 A = Nastavení uživatelem nyní zůstávají a nevrací se do defaultního stavu i po ukončení aplikace.
-A = Každé uživatelské nastavení má u sebe nyní otazníček, u kterého když uživatel najede myší, zobrazí stručný popis, co nastavení dělá.
+U = Při najetí myši nad uživatelským nastavením se ukáže stručný tip, co nastavení dělá.
 A = Každý výsledek se nyní dá rychle znovu-aktualizovat zmáčknutím tlačítka.
 U = HikFind nyní umí smazat jednotlivé položky z výsledků.
+A = HikFind nyní zobrazuje při vyhledání zda již předmět byl vyhledaný, či nikoliv
+U = HikFind má zlepšený a přehlednější vzhled Nastavení - má podnastavení, které se dají kolapsovat
+U = HikFind obsah v okně je o kousek větší.
+U = HikFind nyní podporuje vyhledávání NVR/DVR dokumentů (Communication matrix)
+U = HikFind má nyní možost FULL / FAST cropu. FAST crop je až 4x rychlejší jak FULL CROP, ale při obrázku s více (nespojenými) předměty je nefunkční.
 
 
 CO UDĚLAT:
 - Podpora WebP convertor obrázku
-- Zrychlit ImageEditor === to je fakt hrůza..
-- Zrychlit stahování obrázků - download jako samotný je pecka, ale převod dat z obrázku MemoryStreamem do BitMapy je z nějákého důvodu strašně pomalý??
 
 - Podpora vyhledávání rekordérů
 

@@ -226,18 +226,25 @@ namespace HIKFind.Search.Webscraper
 
         public async static Task<Bitmap> DownloadImage(string url)
         {
-            using(Stream stream = await wClient.OpenReadTaskAsync(new Uri(url)))
+            try
             {
-                Bitmap bitmap = new Bitmap(stream);
+                using (Stream stream = await wClient.OpenReadTaskAsync(new Uri(url)))
+                {
+                    Bitmap bitmap = new Bitmap(stream);
 
-                if (bitmap != null)
-                {
-                    return bitmap;
+                    if (bitmap != null)
+                    {
+                        return bitmap;
+                    }
+                    else
+                    {
+                        throw new Exception("Obrázek je NULL.");
+                    }
                 }
-                else
-                {
-                    throw new Exception("Obrázek je NULL.");
-                }
+            }
+            catch(Exception ex)
+            {
+                throw;
             }
         }
 

@@ -2,6 +2,16 @@
 {
     public class SearchedResultItem
     {
+        string resultName;
+
+        public string ResultName
+        {
+            get
+            {
+                return resultName;
+            }
+        }
+
         string name;
 
         public string Name 
@@ -31,8 +41,9 @@
             } 
         }
 
-        public SearchedResultItem(string name, string url, bool exists)
+        public SearchedResultItem(string webClientLang, string name, string url, bool exists)
         {
+            this.resultName = "["+webClientLang+"] | " + name;
             this.name = name;
             this.url = url;
             this.exists = exists;

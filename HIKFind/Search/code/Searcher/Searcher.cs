@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using HIKFind.Helpers;
+using HIKFind.ImageEditing;
 
 namespace HIKFind
 {
@@ -50,8 +51,9 @@ namespace HIKFind
 
             loading.Text = "Získávám jméno produktu";
 
+            
             string name = resultScraper.ScrapeBetween(new FindBetween[]
-            { new FindBetween("<h1 class=\"", "h1>"), new FindBetween("\">", "</") }).Trim();
+            { new FindBetween("<h1 class=\"", "h1>"), new FindBetween("\">", "</") });
 
             if (name == null)
             {
@@ -59,6 +61,8 @@ namespace HIKFind
                 InfoWindow.ShowUp("Požadovaná stránka buďto není hikvision.com, nebo se nejedná o stránku s produktem.", InfoWindows.Helpers.InfoWindowEnum.Alert);
                 return null;
             }
+
+            name = name.Trim();
 
             tempProduct.Name = name;
             name = string.Join("-", name.Split(System.IO.Path.GetInvalidFileNameChars()));
@@ -126,18 +130,29 @@ namespace HIKFind
 
                                     if (HikFindSearch.settings["crop"].Check)
                                     {
-                                        loading.Text = "Ořezávám obrázek";
-                                        bmp = await ImageEditor.Crop(bmp);
-                                    }
-                                    if (!HikFindSearch.settings["transparent"].Check)
+                                    loading.Text = "Ořezávám obrázek";
+                                    if (HikFindSearch.settings["fastcrop"].Check)
                                     {
-                                        loading.Text = "Dávám bílé pozadí";
-                                        bmp = await ImageEditor.WhiteBackground(bmp);
+                                        bmp = await ImageEditor.FastCrop(bmp);
                                     }
+                                    else
+                                    {
 
-                                    loading.Text = "Ukládám obrázek a převádím formát";
+                                    }
+                                    bmp = await ImageEditor.FullCrop(bmp);
+
+                                }
+
+                                if (!HikFindSearch.settings["transparent"].Check || imageFormat.Equals(System.Drawing.Imaging.ImageFormat.Jpeg))
+                                {
+                                    loading.Text = "Dávám bílé pozadí";
+                                    bmp = await ImageEditor.WhiteBackground(bmp);
+                                }
+
+                                loading.Text = "Ukládám obrázek a převádím formát";
                                     bmp.Save(tempFolderPath + (imageCount + 1) + "-" + @name + format, imageFormat);
-                                    imageCount++;
+                                tempProduct.AddImage(bmp);    
+                                imageCount++;
                             }
                             catch (System.ArgumentException ex)
                             {
@@ -150,6 +165,7 @@ namespace HIKFind
                             documentCount++;
                             download.Start();
                             loading.Text = "Stahuji a ukládám dokument " + HikFindSearch.settings.ElementAt(i).Value.Text;
+                            Console.WriteLine(stringResults[z]);
                             await WebScraper.DownloadFile("https://www.hikvision.com" + stringResults[z], tempFolderPath + HikFindSearch.settings.ElementAt(i).Value.Text + "_" + @name + ".pdf");
                             download.Stop();
                         }

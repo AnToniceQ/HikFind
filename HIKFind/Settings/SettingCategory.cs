@@ -3,29 +3,8 @@ using System.Linq;
 
 namespace HIKFind.Settings
 {
-    public class SettingCategory
+    public class SettingCategory : BaseSetting
     {
-        Dictionary<string, SearchSetting> searchSettings;
-        public Dictionary<string, SearchSetting> SearchSettings
-        {
-            get
-            {
-                return searchSettings;
-            }
-            set
-            {
-                searchSettings = value;
-            }
-        }
-
-        public SearchSetting[] GUISearchSettings
-        {
-            get
-            {
-                return SearchSettings.Values.ToArray();
-            }
-        }
-
         protected private string productCategory;
         public string ProductCategory
         {
@@ -52,22 +31,17 @@ namespace HIKFind.Settings
             }
         }
 
-        public SettingCategory(string name, Dictionary<string, SearchSetting> checkboxSettings)
+        public SettingCategory(string name, BaseSetting[] searchSettings) : base(searchSettings)
         {
             this.name = name;
-            this.searchSettings = checkboxSettings;
+            this.searchSettings = searchSettings;
         }
 
-        public SettingCategory(string name, string productCategory, Dictionary<string, SearchSetting> checkboxSettings)
+        public SettingCategory(string name, string productCategory, BaseSetting[] searchSettings) : base(searchSettings)
         {
             this.name = name;
             this.productCategory = productCategory;
-            this.searchSettings = checkboxSettings;
-        }
-
-        public SettingCategory()
-        {
-
+            this.searchSettings = searchSettings;
         }
     }
 }

@@ -38,19 +38,31 @@
 
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel>
-                                    <Image Source="Images/refresh.png" Visibility="Visible" Width="32px"></Image>
-                                    <TextBlock Text="{Binding Name}" ToolTip="{Binding Url}" HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ResultName}" ToolTip="{Binding Url}" HorizontalAlignment="Stretch">
                                         <TextBlock.ContextMenu>
                                             <ContextMenu>
                                                 <MenuItem Header="zkopíruj URL adresu" Click="CopyUrl" ToolTip="{Binding Url}">
                                                     <MenuItem.Icon>
-                                                        <Image Source="../Images/information.jpg"/>
+                                                        <Image Source="/Images/information.jpg"/>
                                                     </MenuItem.Icon>
                                                 </MenuItem>
                                             </ContextMenu>
                                         </TextBlock.ContextMenu>
                                     </TextBlock>
+
+                                    <Image Source="/Images/greendot.png" Margin="5px 0 0 0" Width="8px" ToolTip="Tento produkt již máte vyhledný.">
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Setter Property="Visibility" Value="Hidden"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Exists}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

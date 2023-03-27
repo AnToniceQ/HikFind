@@ -1,18 +1,13 @@
 ﻿namespace HIKFind.Settings
 {
-    public class CheckboxSetting : SearchSetting
+    public class CheckboxSetting : BaseSearchSetting
     {
-        public CheckboxSetting(string text, string description, bool defaultCheck) : base(text, description, defaultCheck)
+        public CheckboxSetting(string name, string text, string description, bool defaultCheck, BaseSetting[] searchSettings) : base(name, text, description, defaultCheck, searchSettings)
         {
         }
 
-        public CheckboxSetting(string text, string description) : base(text, description)
+        public CheckboxSetting(string name, string text, string description, BaseSetting[] searchSettings) : base(name, text, description, searchSettings)
         {
-        }
-
-        public CheckboxSetting()
-        {
-
         }
     }
 }

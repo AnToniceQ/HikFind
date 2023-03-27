@@ -10,11 +10,11 @@ none
 false
 TRACE
 C:\Users\tonda\Source\Repos\ThonyPig\HikFind\HIKFind\App.xaml
-61934901309
-3-845252254
-24-1516378828
-23-1419223848
-InfoWindow.xaml;LoadingWindow.xaml;Search\HikFindSearch.xaml;AlertWindow.xaml;Search\SearchedResult.xaml;Search\Web\WebBrowserWindow.xaml;
+5-862209817
+3946963847
+281865029023
+21-894933244
+InfoWindows\InfoWindow.xaml;InfoWindows\LoadingWindow.xaml;HikFindSearch.xaml;Search\window\SearchedResult.xaml;Search\window\WebBrowserWindow.xaml;
 
-False
+True
 

@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\HIKFind",
-    "\\HIKFind\\Search"
+    "\\HIKFind\\ImageEditing"
   ],
-  "SelectedNode": "\\HIKFind\\Search\\HikFindSearch.xaml.cs",
+  "SelectedNode": "\\HIKFind\\App.xaml.cs",
   "PreviewInSolutionExplorer": false
 }

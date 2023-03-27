@@ -2,7 +2,7 @@
 
 namespace HIKFind.Settings
 {
-    class FinderSearchSetting : SearchSetting
+    class FinderSearchSetting : BaseSearchSetting
     {
         protected private FindBetween[] findBetweens = null;
         public FindBetween[] FindBetweens
@@ -26,7 +26,7 @@ namespace HIKFind.Settings
             }
         }
 
-        public FinderSearchSetting(string text, FindBetween findBetween, bool defaultCheck, string description, bool multipleResults) : base(text, description, defaultCheck)
+        public FinderSearchSetting(string name, string text, string description, bool defaultCheck, FindBetween findBetween, bool multipleResults, BaseSetting[] searchSettings) : base(name, text, description, defaultCheck, searchSettings)
         {
             this.text = text;
             this.findBetweens = new FindBetween[1];
@@ -35,17 +35,12 @@ namespace HIKFind.Settings
             this.multipleResults = multipleResults;
         }
 
-        public FinderSearchSetting(string text, FindBetween[] findBetween, bool defaultCheck, string description, bool multipleResults) : base(text, description, defaultCheck)
+        public FinderSearchSetting(string name, string text, string description, bool defaultCheck, FindBetween[] findBetween, bool multipleResults, BaseSetting[] searchSettings) : base(name, text, description, defaultCheck, searchSettings)
         {
             this.text = text;
             this.findBetweens = findBetween;
             this.check = defaultCheck;
             this.multipleResults = multipleResults;
-        }
-
-        public FinderSearchSetting()
-        {
-
         }
 
         public string[] Find(WebScraper webScraper)

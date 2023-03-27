@@ -13,19 +13,14 @@ namespace HIKFind.Settings
             }
         }
 
-        public FinderRadioSetting(string text, string group, string description, FindBetween findBetween, bool defaultCheck, bool multipleSearch) : base(text, findBetween, defaultCheck, description, multipleSearch)
+        public FinderRadioSetting(string name, string text, string description, string group, bool defaultCheck, FindBetween findBetween, bool multipleSearch, BaseSetting[] searchSettings) : base(name, text, description,  defaultCheck, findBetween, multipleSearch, searchSettings)
         {
             this.group = group;
         }
 
-        public FinderRadioSetting(string text, string group, string description, FindBetween[] findBetween, bool defaultCheck, bool multipleSearch) : base(text, findBetween, defaultCheck, description, multipleSearch)
+        public FinderRadioSetting(string name, string text, string description, string group, bool defaultCheck, FindBetween[] findBetween, bool multipleSearch, BaseSetting[] searchSettings) : base(name, text, description, defaultCheck, findBetween, multipleSearch, searchSettings)
         {
             this.group = group;
-        }
-
-        public FinderRadioSetting()
-        {
-
         }
     }
 }
