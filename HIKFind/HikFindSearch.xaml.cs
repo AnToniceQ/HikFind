@@ -28,8 +28,8 @@ namespace HIKFind
     {
         public static ObservableCollection<Product> products = new ObservableCollection<Product>();
 
-        public static ObservableCollection<SettingCategory> settingCategories = new ObservableCollection<SettingCategory>();
-        public static Dictionary<string, BaseSearchSetting> settings = new Dictionary<string, BaseSearchSetting>();
+        public static ObservableCollection<BaseSetting> settings = new ObservableCollection<BaseSetting>();
+        public static Dictionary<string, BaseSearchSetting> dictSettings = new Dictionary<string, BaseSearchSetting>();
 
         Searcher searcher = new Searcher(10, new WebScraper[]
         {
@@ -40,11 +40,11 @@ namespace HIKFind
         public HikFindSearch()
         {
             InitializeComponent();
-            foreach (SettingCategory settingCategory in settingCategories)
+            foreach (SettingCategory settingCategory in settings)
             {
-                FindAllSettings(settingCategory).ToList().ForEach(x => settings.Add(x.Key, x.Value));
+                FindAllSettings(settingCategory).ToList().ForEach(x => dictSettings.Add(x.Key, x.Value));
             }
-            SearchSettingsCategories.ItemsSource = settingCategories;
+            SearchSettingsCategories.ItemsSource = settings;
             productsList.DataContext = products;
         }
 
@@ -81,7 +81,7 @@ namespace HIKFind
 
             try
             {
-                if (settings["upravavstupu"].Check)
+                if (dictSettings["upravavstupu"].Check)
                 {
                     loading.Text = "Upravuji Input";
                     search = await InputHelper.OptimizeInput(search);
@@ -187,7 +187,7 @@ namespace HIKFind
         public static void SaveSettings()
         {
             JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-            File.WriteAllText("settings.json", JsonConvert.SerializeObject(settingCategories, settings));
+            File.WriteAllText("settings.json", JsonConvert.SerializeObject(HikFindSearch.settings, settings));
         }
 
         private void DeleteProductsClick(object sender, RoutedEventArgs e)
