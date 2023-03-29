@@ -80,7 +80,7 @@ namespace HIKFind.ImageEditing
             Func<ImageDirectionEnum, int, Bitmap, int> LastNaNBackgroundPixelInDirection =
                 (direction, position, bmp) =>
                 {
-                    int index = position;
+                    int index;
                     int mainIndex = position;
                     int moverX;
                     int moverY;
@@ -96,6 +96,7 @@ namespace HIKFind.ImageEditing
                         }
                         for (int i = 0; i < 2; i++)
                         {
+                            index = position;
                             if (i == 0)
                             {
                                 moverX = 1;
@@ -129,6 +130,7 @@ namespace HIKFind.ImageEditing
                         }
                         for (int i = 0; i < 2; i++)
                         {
+                            index = position;
                             if (i == 0)
                             {
                                 moverY = 1;

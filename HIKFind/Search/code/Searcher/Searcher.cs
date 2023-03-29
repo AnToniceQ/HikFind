@@ -166,7 +166,7 @@ namespace HIKFind
                             download.Start();
                             loading.Text = "Stahuji a ukládám dokument " + HikFindSearch.settings.ElementAt(i).Value.Text;
                             Console.WriteLine(stringResults[z]);
-                            await WebScraper.DownloadFile("https://www.hikvision.com" + stringResults[z], tempFolderPath + HikFindSearch.settings.ElementAt(i).Value.Text + "_" + @name + ".pdf");
+                            await WebScraper.DownloadFile("https://www.hikvision.com" + stringResults[z], tempFolderPath + HikFindSearch.settings.ElementAt(i).Value.Text + "-" + @name + ".pdf");
                             download.Stop();
                         }
 
