@@ -36,7 +36,7 @@ namespace HIKFind
             }
             else
             {
-                HikFindSearch.settingCategories = new ObservableCollection<SettingCategory> {
+                HikFindSearch.settings = new ObservableCollection<BaseSetting> {
                     new SettingCategory("Stahování", new BaseSetting[]
                     {
                     new FinderCheckboxSetting("obrazky","Obrázky","Nastavení, zda má HikFind stahovat Obrázky produktu.",

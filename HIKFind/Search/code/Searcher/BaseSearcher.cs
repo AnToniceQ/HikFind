@@ -36,7 +36,7 @@ namespace HIKFind
 
             string[] rawResults = new string[0];
 
-            if (!HikFindSearch.settings["webhledani"].Check)
+            if (!HikFindSearch.dictSettings["webhledani"].Check)
             {
                 for (int i = 0; i < webScrapers.Length; i++)
                 {
@@ -110,7 +110,7 @@ namespace HIKFind
 
 
 
-            if ((resultItems.Count <= 0 && HikFindSearch.settings["webpohik"].Check) || HikFindSearch.settings["webhledani"].Check)
+            if ((resultItems.Count <= 0 && HikFindSearch.dictSettings["webpohik"].Check) || HikFindSearch.dictSettings["webhledani"].Check)
             {
                 webScraperWEB.ResetWebClient();
                 try

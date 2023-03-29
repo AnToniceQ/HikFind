@@ -86,14 +86,14 @@ namespace HIKFind
 
             loading.Text = "Získávám URL k požadovaným informacím";
 
-            for (int i = 0; i < HikFindSearch.settings.Count; i++)
+            for (int i = 0; i < HikFindSearch.dictSettings.Count; i++)
             {
-                if (HikFindSearch.settings.ElementAt(i).Value is FinderSearchSetting && HikFindSearch.settings.ElementAt(i).Value.Check)
+                if (HikFindSearch.dictSettings.ElementAt(i).Value is FinderSearchSetting && HikFindSearch.dictSettings.ElementAt(i).Value.Check)
                 {
 
-                    loading.Text = "Snažím se získat URL k " + HikFindSearch.settings.ElementAt(i).Value.Text;
+                    loading.Text = "Snažím se získat URL k " + HikFindSearch.dictSettings.ElementAt(i).Value.Text;
 
-                    FinderSearchSetting searchSetting = (FinderSearchSetting) HikFindSearch.settings.ElementAt(i).Value;
+                    FinderSearchSetting searchSetting = (FinderSearchSetting) HikFindSearch.dictSettings.ElementAt(i).Value;
                     string[] stringResults = searchSetting.Find(resultScraper);
 
                     if (stringResults == null || stringResults.Length < 1 || stringResults[0] == null)
@@ -116,7 +116,7 @@ namespace HIKFind
                                     string format;
                                     System.Drawing.Imaging.ImageFormat imageFormat;
 
-                                    if (HikFindSearch.settings["jpgformat"].Check)
+                                    if (HikFindSearch.dictSettings["jpgformat"].Check)
                                     {
                                         format = ".jpg";
                                         imageFormat = System.Drawing.Imaging.ImageFormat.Jpeg;
@@ -128,10 +128,10 @@ namespace HIKFind
                                     }
                                     loading.Text = "Manipuluji s obrázkem pro správné zobrazení";
 
-                                    if (HikFindSearch.settings["crop"].Check)
+                                    if (HikFindSearch.dictSettings["crop"].Check)
                                     {
                                     loading.Text = "Ořezávám obrázek";
-                                    if (HikFindSearch.settings["fastcrop"].Check)
+                                    if (HikFindSearch.dictSettings["fastcrop"].Check)
                                     {
                                         bmp = await ImageEditor.FastCrop(bmp);
                                     }
@@ -143,7 +143,7 @@ namespace HIKFind
 
                                 }
 
-                                if (!HikFindSearch.settings["transparent"].Check || imageFormat.Equals(System.Drawing.Imaging.ImageFormat.Jpeg))
+                                if (!HikFindSearch.dictSettings["transparent"].Check || imageFormat.Equals(System.Drawing.Imaging.ImageFormat.Jpeg))
                                 {
                                     loading.Text = "Dávám bílé pozadí";
                                     bmp = await ImageEditor.WhiteBackground(bmp);
@@ -164,9 +164,9 @@ namespace HIKFind
                         {
                             documentCount++;
                             download.Start();
-                            loading.Text = "Stahuji a ukládám dokument " + HikFindSearch.settings.ElementAt(i).Value.Text;
+                            loading.Text = "Stahuji a ukládám dokument " + HikFindSearch.dictSettings.ElementAt(i).Value.Text;
                             Console.WriteLine(stringResults[z]);
-                            await WebScraper.DownloadFile("https://www.hikvision.com" + stringResults[z], tempFolderPath + HikFindSearch.settings.ElementAt(i).Value.Text + "_" + @name + ".pdf");
+                            await WebScraper.DownloadFile("https://www.hikvision.com" + stringResults[z], tempFolderPath + HikFindSearch.dictSettings.ElementAt(i).Value.Text + "_" + @name + ".pdf");
                             download.Stop();
                         }
 

@@ -78,6 +78,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Settings\BaseSearchSetting.cs" />
+    <Compile Include="Settings\BaseSetting.cs" />
+    <Compile Include="Settings\CheckboxSetting.cs" />
+    <Compile Include="Settings\FinderCheckboxSetting.cs" />
+    <Compile Include="Settings\FinderRadioSetting.cs" />
+    <Compile Include="Settings\FinderSearchSetting.cs" />
+    <Compile Include="Settings\RadioSetting.cs" />
+    <Compile Include="Settings\SettingCategory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -96,15 +104,7 @@
     </Compile>
     <Compile Include="Product.cs" />
     <Compile Include="Search\code\Searcher\Searcher.cs" />
-    <Compile Include="Settings\CheckboxSetting.cs" />
-    <Compile Include="Settings\FinderCheckboxSetting.cs" />
-    <Compile Include="Settings\FinderRadioSetting.cs" />
-    <Compile Include="Settings\FinderSearchSetting.cs" />
-    <Compile Include="Settings\RadioSetting.cs" />
     <Compile Include="Search\code\Webscraper\FindBetween.cs" />
-    <Compile Include="Settings\BaseSetting.cs" />
-    <Compile Include="Settings\SettingCategory.cs" />
-    <Compile Include="Settings\BaseSearchSetting.cs" />
     <Compile Include="Search\code\Helpers\SearchedResultItem.cs" />
     <Compile Include="Search\window\SearchedResult.xaml.cs">
       <DependentUpon>SearchedResult.xaml</DependentUpon>
