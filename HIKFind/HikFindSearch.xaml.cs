@@ -28,7 +28,7 @@ namespace HIKFind
     {
         public static ObservableCollection<Product> products = new ObservableCollection<Product>();
 
-        public static ObservableCollection<BaseSetting> settings = new ObservableCollection<BaseSetting>();
+        public static ObservableCollection<BaseSetting> settings;
         public static Dictionary<string, BaseSearchSetting> dictSettings = new Dictionary<string, BaseSearchSetting>();
 
         Searcher searcher = new Searcher(10, new WebScraper[]
@@ -40,15 +40,13 @@ namespace HIKFind
         public HikFindSearch()
         {
             InitializeComponent();
-            foreach (SettingCategory settingCategory in settings)
-            {
-                FindAllSettings(settingCategory).ToList().ForEach(x => dictSettings.Add(x.Key, x.Value));
-            }
             SearchSettingsCategories.ItemsSource = settings;
             productsList.DataContext = products;
+
+
         }
 
-        private Dictionary<string, BaseSearchSetting> FindAllSettings(BaseSetting category)
+        public static Dictionary<string, BaseSearchSetting> FindAllSettings(BaseSetting category)
         {
             Dictionary<string, BaseSearchSetting> tempSettings = new Dictionary<string, BaseSearchSetting>();
             if(!(category.SearchSettings is null))
@@ -156,7 +154,6 @@ namespace HIKFind
 
                 string fileToMove = tempFolderPath + fileName;
                 string moveTo = product.FolderPath + fileName;
-                //moving file
                 File.Move(fileToMove, moveTo);
             }
         }
@@ -186,8 +183,14 @@ namespace HIKFind
 
         public static void SaveSettings()
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-            File.WriteAllText("settings.json", JsonConvert.SerializeObject(HikFindSearch.settings, settings));
+            Dictionary<string, bool> savedSettings = new Dictionary<string, bool>();
+
+            foreach(KeyValuePair<string, BaseSearchSetting> setting in dictSettings)
+            {
+                savedSettings.Add(setting.Key, setting.Value.Check);
+            }
+
+            File.WriteAllText("settings.json", JsonConvert.SerializeObject(savedSettings));
         }
 
         private void DeleteProductsClick(object sender, RoutedEventArgs e)

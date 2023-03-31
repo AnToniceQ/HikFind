@@ -8,6 +8,8 @@ using System.Windows;
 using System.Xml.Serialization;
 using System.Configuration;
 using Microsoft.SqlServer.Server;
+using HIKFind.Properties;
+using System.Linq;
 
 namespace HIKFind
 {
@@ -25,18 +27,7 @@ namespace HIKFind
                 Directory.Delete(ConfigurationManager.AppSettings.Get("FolderResultPath") + "temp", true);
             }
 
-            if (!File.Exists("settings.json"))
-            {/**
-                using (StreamReader rd = new StreamReader("settings.json"))
-                {
-                    JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-                    HikFindSearch.settingCategories = JsonConvert.DeserializeObject<ObservableCollection<SettingCategory>>(rd.ReadToEnd(), settings);
-                }
-                **/
-            }
-            else
-            {
-                HikFindSearch.settings = new ObservableCollection<BaseSetting> {
+            HikFindSearch.settings = new ObservableCollection<BaseSetting> {
                     new SettingCategory("Stahování", new BaseSetting[]
                     {
                     new FinderCheckboxSetting("obrazky","Obrázky","Nastavení, zda má HikFind stahovat Obrázky produktu.",
@@ -56,8 +47,8 @@ namespace HIKFind
                     null),
 
 
-                    new SettingCategory("NVR/DVR", new BaseSetting[] 
-                    { 
+                    new SettingCategory("NVR/DVR", new BaseSetting[]
+                    {
                     new FinderCheckboxSetting("commmatrix","Communication-Matrix","Nastavení, zda má HikFind stahovat Communication Matrix produktu.",
                     true,new FindBetween[]{ new FindBetween("id=\"Communication_Matrix\"", "</div>"), new FindBetween("href=\"", "\"") }, false,
                     null)
@@ -98,7 +89,36 @@ namespace HIKFind
                             null),
                         })
                     })
-                };
+            };
+
+            foreach (BaseSetting mainSearch in HikFindSearch.settings)
+            {
+                HikFindSearch.FindAllSettings(mainSearch).ToList().ForEach(x => HikFindSearch.dictSettings.Add(x.Key, x.Value));
+            }
+
+            if (File.Exists("settings.json"))
+            {
+                Dictionary<string, bool> loadedSettings = new Dictionary<string, bool>();
+                using (StreamReader rd = new StreamReader("settings.json"))
+                {
+                    loadedSettings = JsonConvert.DeserializeObject<Dictionary<string, bool>>(rd.ReadToEnd());
+                }
+
+
+                List<string> usedRadios = new List<string>();
+                foreach(KeyValuePair<string, bool> kvp in loadedSettings)
+                {
+                    BaseSetting setting = HikFindSearch.dictSettings[kvp.Key];
+                    if (setting is RadioSetting)
+                    {
+                        RadioSetting rdioSetting = setting as RadioSetting;
+                        if(usedRadios.Contains(rdioSetting.Group)) {
+                            continue;
+                        }
+                        usedRadios.Add(rdioSetting.Group);
+                    }
+                    HikFindSearch.dictSettings[kvp.Key].Check = kvp.Value;
+                }
             }
             HikFindSearch mainWindow = new HikFindSearch();
             mainWindow.ShowDialog();
